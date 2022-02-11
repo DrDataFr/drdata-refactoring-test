@@ -2,5 +2,9 @@
 
 interface Repository
 {
-    public function getById($id);
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getById(int $id);
 }
