@@ -2,11 +2,25 @@
 
 class Template
 {
-    public $id;
-    public $subject;
-    public $content;
+    /**
+     * @var int
+     */
+    public int $id;
+    /**
+     * @var string
+     */
+    public string $subject;
+    /**
+     * @var string
+     */
+    public string $content;
 
-    public function __construct($id, $subject, $content)
+    /**
+     * @param int $id
+     * @param string $subject
+     * @param string $content
+     */
+    public function __construct(int $id, string $subject, string $content)
     {
         $this->id = $id;
         $this->subject = $subject;

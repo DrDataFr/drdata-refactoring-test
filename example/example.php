@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 require_once __DIR__ . '/../src/Entity/Destination.php';
 require_once __DIR__ . '/../src/Entity/Quote.php';
@@ -14,27 +14,29 @@ require_once __DIR__ . '/../src/Repository/DestinationRepository.php';
 require_once __DIR__ . '/../src/Repository/QuoteRepository.php';
 require_once __DIR__ . '/../src/Repository/SiteRepository.php';
 require_once __DIR__ . '/../src/TemplateManager.php';
+require_once __DIR__ . '/../src/TemplateEngine/TemplateManager.php';
+require_once __DIR__ . '/../src/Templates/ShippingInfoTemplate.php';
 
 $faker = \Faker\Factory::create();
 
 $template = new Template(
     1,
     'Votre livraison à [quote:destination_name]',
-    "
-Bonjour [user:first_name],
+    "Bonjour [user:first_name],
 
-Merci de nous avoir contacté pour votre livraison à [quote:destination_name].
+            Merci de nous avoir contacté pour votre livraison à [quote:destination_name].
 
-Bien cordialement,
+            Bien cordialement,
 
-L'équipe de Shipper
-");
+            L'équipe de Shipper"
+);
+
 $templateManager = new TemplateManager();
 
 $message = $templateManager->getTemplateComputed(
     $template,
     [
-        'quote' => new Quote($faker->randomNumber(), $faker->randomNumber(), $faker->randomNumber(), $faker->date())
+        'quote' => new Quote($faker->randomNumber(), $faker->randomNumber(), $faker->randomNumber(), $faker->dateTime())
     ]
 );
 
